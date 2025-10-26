@@ -3,23 +3,18 @@ const int GledPin =10;
 const int BledPin =11;
 const int buttonPin = 2;
 
-
-int mood =0;
-const int neutral_mood =10;
-int button_state =0;
-bool button_pressed = false;
-unsigned long touched_timer = 0;
-unsigned long reduced_timer = 0;
 const long untouch_interval = 5000;
 const long reduced_interval = 1000;
-
-
-unsigned long previous_millis =0;
-int fading_direction =1;
-
-unsigned long blink_timer = 0;
-bool led_visible = true;
+const int neutral_mood =10;
 const long blink_interval = 200;
+
+int mood =0;
+int button_state =0;
+unsigned long touched_timer = 0;
+unsigned long reduced_timer = 0;
+unsigned long blink_timer = 0;
+bool button_pressed = false;
+bool led_visible = true;
 
 
 void setup()
@@ -40,8 +35,6 @@ void setup()
 void loop()
 {
 
-  //show_led_state(mood);
-
   button_state = digitalRead(buttonPin);
 
   if(button_state == HIGH && !button_pressed)
@@ -57,7 +50,7 @@ void loop()
     button_pressed = false;
   }
 
-  //toy getting sad 
+  //decreasing the mood
   unsigned long current_timer = millis();
   if(current_timer - touched_timer > untouch_interval)
   {
